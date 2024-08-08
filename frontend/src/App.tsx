@@ -39,7 +39,6 @@ const App = () => {
                 label="Text"
                 multiline
                 rows={4}
-                disabled
               />
             </Grid>
           </Grid>
