@@ -1,17 +1,15 @@
 import { Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from './app/hooks';
-import { selectAppDecode, selectAppEncode, selectAppError, selectAppIsLoading } from './store/appSlice';
+import { selectAppDecode, selectAppEncode, selectAppError } from './store/appSlice';
 import { ChangeEvent, useState } from 'react';
 import { Message } from './types';
 import { encodeMessage, decodeMessage } from './store/appThunks';
-import Spinner from './components/Spinner/Spinner';
 
 const App = () => {
   const dispatch = useAppDispatch();
   const encodedMessage = useAppSelector(selectAppEncode);
   const decodedMessage = useAppSelector(selectAppDecode);
   const error = useAppSelector(selectAppError);
-  const isLoading = useAppSelector(selectAppIsLoading);
 
   const [inputText, setInputText] = useState<Message>({
     message: '',
@@ -40,7 +38,7 @@ const App = () => {
   return (
     <Container maxWidth="md">
       <Box mt={5}>
-        <Typography variant="h4" align="center" gutterBottom>
+        <Typography variant="h4" align="center" mb={4}>
           Vigenere Cipher
         </Typography>
         <Grid container spacing={2} justifyContent="center">
@@ -69,7 +67,6 @@ const App = () => {
               fullWidth
               variant="contained"
               onClick={handleEncode}
-              disabled={isLoading}
             >
               Encode
             </Button>
@@ -79,7 +76,6 @@ const App = () => {
               fullWidth
               variant="contained"
               onClick={handleDecode}
-              disabled={isLoading}
             >
               Decode
             </Button>
@@ -90,7 +86,7 @@ const App = () => {
               label="Encoded/Decoded Text"
               multiline
               rows={4}
-              value={isLoading ? <Spinner/> : (encodedMessage || decodedMessage)}
+              value={encodedMessage || decodedMessage}
               disabled
             />
           </Grid>
