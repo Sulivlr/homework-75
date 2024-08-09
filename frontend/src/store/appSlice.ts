@@ -39,7 +39,7 @@ const appSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.decodedMessage = action.payload.decoded;
-    }).addCase(decodeMessage.rejected, (state,action) => {
+    }).addCase(decodeMessage.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message || 'error message';
     });
